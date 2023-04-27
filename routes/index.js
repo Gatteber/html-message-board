@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const moment = require('moment');
 
+//decode url form
+router.use(express.urlencoded({extended: true}));
+router.use(express.json());
+
 //sample message
-const messages = [
+let messages = [
   {
     text: 'Hello there!',
     user: 'Obi-Wan',
@@ -25,5 +29,18 @@ const messages = [
 router.get('/', (req, res) => {
   res.render('index', {title: 'Mini Message Board', messages: messages});
 });
+
+router
+  .get('/new', (req, res) => {
+    res.render('form', {title: 'Create a new Post'});
+  })
+  .post('/new', (req, res) => {
+    messages.push({
+      text: req.body.message,
+      user: req.body.name,
+      added: moment(new Date()).format('MM-D-YYYY, h:mm:ss a'),
+    });
+    res.redirect('/');
+  });
 
 module.exports = router;

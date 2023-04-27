@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const index = require('./routes/index.js');
+const newPost = require('./routes/new.js');
 
 const app = express();
 
@@ -16,6 +17,9 @@ app.set('view engine', 'ejs');
 
 //refactored index page
 app.use('/', index);
+
+//posts
+app.use('/', newPost);
 
 //404 handler, leave as last route
 app.use((req, res, next) => {
