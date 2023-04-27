@@ -1,0 +1,17 @@
+<h1>The only Anonymous message board you'll need</h1>
+
+<div class="message-container">
+    <% messages.forEach((message) => { %>
+        <div class="message-container-item">
+            <div class="message-container-header">
+                <ul class="message-container-header-list">
+                    <li>Posted by: <%= message.user %></li>
+                    <li><%= message.added %></li>
+                </ul>
+                <div class="message-container-content">
+                    <p><%= message.text %></p>
+                </div>
+        </div>
+        </div>
+    <% }) %>
+</div>
